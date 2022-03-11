@@ -24,9 +24,15 @@ const Card = ({ imageUrl, title, price }) => {
         width: '100%',
         border: `1px solid ${palette.gray}`,
         borderRadius: '30px',
-        '@media (max-width: 992px)': {
-            maxWidth: '145px',
-          }
+        boxShadow: '0px 14px 30px rgba(0, 0, 0, 0.05)',
+        cursor: 'pointer',
+        transition: 'all 0.3s linear',
+        ':hover': {
+          transform: 'scale(1.04)'
+        },
+        '@media (max-width: 492px)': {
+          maxWidth: '145px'
+        }
       }}
     >
       <Flex
@@ -42,7 +48,7 @@ const Card = ({ imageUrl, title, price }) => {
           height={150}
           objectFit="contain"
         />
-        <Text fontSize={[1,2]} mb={'10px'}>
+        <Text fontSize={[1, 2]} mb={'10px'}>
           {title}
         </Text>
         <Flex
@@ -50,7 +56,7 @@ const Card = ({ imageUrl, title, price }) => {
           alignItems={'center'}
           width={'100%'}
         >
-          <Text fontSize={[2,3]} fontWeight={500} color={palette.grayText}>
+          <Text fontSize={[2, 3]} fontWeight={500} color={palette.grayText}>
             {price} грн.
           </Text>
           <Button onClick={onClickPlus} sx={{ display: 'block' }}>

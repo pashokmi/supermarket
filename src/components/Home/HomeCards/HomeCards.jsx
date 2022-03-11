@@ -15,6 +15,7 @@ const SearchInput = styled.input`
   position: relative;
   font-size: 16px;
   min-width: 200px;
+  
   ::placeholder {
     color: ${palette.grayText};
     font-size: 16px;
