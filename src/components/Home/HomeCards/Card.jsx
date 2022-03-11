@@ -8,7 +8,7 @@ import Box from 'src/ui/Box'
 import Flex from 'src/ui/Flex'
 import Text from 'src/ui/Text'
 
-const Card = ({ id, imageUrl, title, price }) => {
+const Card = ({ imageUrl, title, price }) => {
   const [isAdded, setIsAdded] = useState(false)
 
   const onClickPlus = () => {
@@ -23,7 +23,10 @@ const Card = ({ id, imageUrl, title, price }) => {
         maxWidth: '210px',
         width: '100%',
         border: `1px solid ${palette.gray}`,
-        borderRadius: '30px'
+        borderRadius: '30px',
+        '@media (max-width: 992px)': {
+            maxWidth: '145px',
+          }
       }}
     >
       <Flex
@@ -39,7 +42,7 @@ const Card = ({ id, imageUrl, title, price }) => {
           height={150}
           objectFit="contain"
         />
-        <Text fontSize={2} mb={'10px'}>
+        <Text fontSize={[1,2]} mb={'10px'}>
           {title}
         </Text>
         <Flex
@@ -47,7 +50,7 @@ const Card = ({ id, imageUrl, title, price }) => {
           alignItems={'center'}
           width={'100%'}
         >
-          <Text fontSize={3} fontWeight={500} color={palette.grayText}>
+          <Text fontSize={[2,3]} fontWeight={500} color={palette.grayText}>
             {price} грн.
           </Text>
           <Button onClick={onClickPlus} sx={{ display: 'block' }}>

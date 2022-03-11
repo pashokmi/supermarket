@@ -14,7 +14,7 @@ const SearchInput = styled.input`
   border: 1px solid ${palette.gray};
   position: relative;
   font-size: 16px;
-  min-width: 300px;
+  min-width: 200px;
   ::placeholder {
     color: ${palette.grayText};
     font-size: 16px;
@@ -37,8 +37,26 @@ const HomeCards = () => {
   return (
     <Box pt={10}>
       {/* Заголовок та інпут  26/44 */}
-      <Flex mb={20} justifyContent={'space-between'} alignItems={'center'}>
-        <Text fontSize={[3, 4, 5]} fontWeight={500} sx={{ display: 'block' }}>
+      <Flex
+        mb={20}
+        justifyContent={'space-between'}
+        alignItems={'center'}
+        sx={{
+          '@media (max-width: 992px)': {
+            flexDirection: 'column'
+          }
+        }}
+      >
+        <Text
+          fontSize={[3, 4, 5]}
+          fontWeight={500}
+          sx={{
+            display: 'block',
+            '@media (max-width: 992px)': {
+              marginBottom:'10px'
+            }
+          }}
+        >
           Всі товари
         </Text>
         <Flex alignItems={'center'} as="label" sx={{ position: 'relative' }}>
@@ -62,11 +80,9 @@ const HomeCards = () => {
           <Card
             key={item.id}
             id={item.id}
-            // onClickPlus={onClickPlus}
             imageUrl={item.imageUrl}
             title={item.title}
             price={item.price}
-            // isAdded={isAdded}
           />
         ))}
       </Flex>
