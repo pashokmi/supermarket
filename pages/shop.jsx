@@ -1,9 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import Box from 'src/ui/Box'
+import Header from 'src/components/Header/Header'
 
-const Shop = props => {
+const Shop = (props) => {
   return (
-    <div>Shop</div>
+    <Box bg={'white'} p={20} borderRadius={'20px'} mt={10}>
+      <Header />
+    </Box>
   )
 }
 

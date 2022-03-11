@@ -8,6 +8,7 @@ export const palette = {
   grayText:'c4c4c4',
   green:'#1db71c',
   red:'#ec0808',
+  blue:'#1c97b7',
   dark: '#000000',
   white:'#ffffff',
   hoverEffect: 'transparent'

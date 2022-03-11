@@ -55,7 +55,7 @@ const Card = ({ imageUrl, title, price }) => {
           </Text>
           <Button onClick={onClickPlus} sx={{ display: 'block' }}>
             {isAdded ? (
-              <BsFillCartXFill size={25} color={palette.red} />
+              <BsFillCartXFill size={25} color={palette.blue} />
             ) : (
               <BsFillCartPlusFill size={25} color={palette.green} />
             )}
