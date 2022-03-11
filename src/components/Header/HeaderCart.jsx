@@ -5,6 +5,8 @@ import Flex from 'src/ui/Flex'
 import Box from 'src/ui/Box'
 import Text from 'src/ui/Text'
 import { FaRegTimesCircle } from 'react-icons/fa'
+import Image from 'next/image'
+import { palette } from 'src/theme/palette'
 
 const HeaderCart = () => {
   const [openCart, setOpenCart] = useState(false)
@@ -16,7 +18,7 @@ const HeaderCart = () => {
     <Box>
       <Button onClick={cartHandler}>
         <Flex alignItems={'center'}>
-          <GiShoppingCart size={35} /> 1205
+          <GiShoppingCart size={35} /> <Text fontSize={'18px'}>1205 грн.</Text> 
         </Flex>
       </Button>
       <Flex
@@ -42,7 +44,38 @@ const HeaderCart = () => {
           >
             <Text fontSize={[3, 4, 5]}>Кошик</Text>
             <Flex onClick={cartHandler} sx={{ cursor: 'pointer' }}>
-              <FaRegTimesCircle size={25} />{' '}
+              <FaRegTimesCircle size={25} />
+            </Flex>
+          </Flex>
+
+          <Flex
+            flexDirection={'column'}
+            justifyContent={'center'}
+            alignItems={'center'}
+            height={'80vh'}
+          >
+            <Flex
+              flexDirection={'column'}
+              justifyContent={'center'}
+              alignItems={'center'}
+            >
+              <Image
+                src={'/static/cart.png'}
+                alt={'Кошик пустий'}
+                width={150}
+                height={150}
+                objectFit="contain"
+              />
+              <Text fontSize={[3, 4]} mb={[1, 2]}>
+                Кошик пустий
+              </Text>
+              <Text
+                fontSize={[1, 2]}
+                color={palette.black}
+                sx={{ opacity: '0.4' }}
+              >
+                Добавте товар, щоб зробити замовлення.
+              </Text>
             </Flex>
           </Flex>
         </Box>
