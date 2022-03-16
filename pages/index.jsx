@@ -39,16 +39,16 @@ export default function Home() {
         <title>Supermarket</title>
         <meta
           name="description"
-          content="Перший в Україні супермаркет деревообробних матеріалів"
+          content="Найкращі мангали, та шампура! Шукайте в нашому магазині."
         />
         <link rel="icon" href="/favicon.ico" />
         <meta property="og:image" content="/static/preview_logo.jpg" />
-        <meta property="og:title" content="WoodMarket" />
+        <meta property="og:title" content="Mangal-Market" />
         <meta property="og:image:type" content="image/png" />
         <meta property="og:image:width" content="100" />
         <meta property="og:image:height" content="100" />
         <meta name="twitter:card" content="summary" />
-        <meta name="twitter:title" content="WoodMarket" />
+        <meta name="twitter:title" content="Mangal-Market" />
         <meta property="twitter:image" content="/static/preview_logo.jpg" />
       </Head>
 
