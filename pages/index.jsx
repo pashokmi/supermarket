@@ -1,3 +1,5 @@
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 import Head from 'next/head'
 import Header from 'src/components/Header/Header'
 import HomeCards from 'src/components/Home/HomeCards/HomeCards'
@@ -6,6 +8,31 @@ import Box from 'src/ui/Box'
 import Container from 'src/ui/Container'
 
 export default function Home() {
+  const [items, setItems] = useState([])
+  const [cartItems, setCartItems] = useState([])
+
+  useEffect(() => {
+    axios
+      .get('https://610688cc1f3487001743796f.mockapi.io/items')
+      .then((res) => {
+        setItems(res.data)
+      })
+    axios
+      .get('https://610688cc1f3487001743796f.mockapi.io/cart')
+      .then((res) => {
+        setCartItems(res.data)
+      })
+  }, [])
+
+  const onAddToCard = (obj) => {
+    axios.post('https://610688cc1f3487001743796f.mockapi.io/cart', obj)
+    setCartItems((prev) => [...prev, obj])
+  }
+  const onRemoveItem = (id) => {
+    axios.delete(`https://610688cc1f3487001743796f.mockapi.io/cart/${id}`)
+    setCartItems((prev) => prev.filter((item) => item.id !== id))
+  }
+
   return (
     <>
       <Head>
@@ -27,10 +54,10 @@ export default function Home() {
 
       <Container>
         <Box bg={'white'} p={20} borderRadius={'20px'} mt={10}>
-          <Header />
+          <Header cartItems={cartItems} onRemoveItem={onRemoveItem} />
           <main>
             <HomeSlider />
-            <HomeCards />
+            <HomeCards items={items} onAddToCard={onAddToCard} />
           </main>
           <footer>footer</footer>
         </Box>

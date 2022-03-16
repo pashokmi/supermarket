@@ -1,14 +1,16 @@
 import React, { useState } from 'react'
 import Button from 'src/ui/Button'
-import { GiShoppingCart } from 'react-icons/gi'
 import Flex from 'src/ui/Flex'
 import Box from 'src/ui/Box'
 import Text from 'src/ui/Text'
 import { FaRegTimesCircle } from 'react-icons/fa'
-import Image from 'next/image'
+import { GiShoppingCart } from 'react-icons/gi'
+import CartItem from './CartItem'
+import { EmptyCart } from './EmptyCart'
+import { CgArrowRight } from 'react-icons/cg'
 import { palette } from 'src/theme/palette'
 
-const HeaderCart = () => {
+const HeaderCart = ({ cartItems = [], onRemoveItem }) => {
   const [openCart, setOpenCart] = useState(false)
   const cartHandler = () => {
     setOpenCart(!openCart)
@@ -18,7 +20,7 @@ const HeaderCart = () => {
     <Box>
       <Button onClick={cartHandler}>
         <Flex alignItems={'center'}>
-          <GiShoppingCart size={35} /> <Text fontSize={'18px'}>1205 грн.</Text> 
+          <GiShoppingCart size={35} /> <Text fontSize={2}>1205 грн.</Text>
         </Flex>
       </Button>
       <Flex
@@ -42,7 +44,9 @@ const HeaderCart = () => {
             justifyContent={'space-between'}
             alignItems={'center'}
           >
-            <Text fontSize={[3, 4, 5]}>Кошик</Text>
+            <Text fontSize={[3, 4, 5]} sx={{ userSelect: 'none' }}>
+              Кошик
+            </Text>
             <Flex onClick={cartHandler} sx={{ cursor: 'pointer' }}>
               <FaRegTimesCircle size={25} />
             </Flex>
@@ -50,33 +54,43 @@ const HeaderCart = () => {
 
           <Flex
             flexDirection={'column'}
-            justifyContent={'center'}
+            justifyContent={cartItems.length ? 'flex-start' : 'center'}
             alignItems={'center'}
             height={'80vh'}
           >
             <Flex
               flexDirection={'column'}
-              justifyContent={'center'}
               alignItems={'center'}
+              overflowY={'scroll'}
             >
-              <Image
-                src={'/static/cart.png'}
-                alt={'Кошик пустий'}
-                width={150}
-                height={150}
-                objectFit="contain"
-              />
-              <Text fontSize={[3, 4]} mb={[1, 2]}>
-                Кошик пустий
-              </Text>
-              <Text
-                fontSize={[1, 2]}
-                color={palette.black}
-                sx={{ opacity: '0.4' }}
-              >
-                Добавте товар, щоб зробити замовлення.
-              </Text>
+              {cartItems.length === 0 ? (
+                <EmptyCart />
+              ) : (
+                <>
+                  {cartItems.map((item) => (
+                    <CartItem  key={item.id} item={item} onRemoveItem={onRemoveItem} />
+                  ))}
+                </>
+              )}
             </Flex>
+          </Flex>
+          <Flex justifyContent={'center'}>
+            {cartItems.length > 0 && (
+              <Button
+                p={15}
+                sx={{
+                  border: `1px solid ${palette.gray}`,
+                  borderRadius: '30px',
+                  color: `${palette.white}`,
+                  display: 'flex',
+                  alignItems: 'center',
+                  fontSize: '18px'
+                }}
+                bg={palette.green}
+              >
+                Оформити замовлення <CgArrowRight size={25} />{' '}
+              </Button>
+            )}
           </Flex>
         </Box>
       </Flex>

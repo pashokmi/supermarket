@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { palette } from 'src/theme/palette'
 import Box from 'src/ui/Box'
 import Flex from 'src/ui/Flex'
 import Text from 'src/ui/Text'
 import styled from 'styled-components'
 import { BsSearch } from 'react-icons/bs'
-import axios from 'axios'
 import Card from './Card'
 
 const SearchInput = styled.input`
@@ -15,7 +14,7 @@ const SearchInput = styled.input`
   position: relative;
   font-size: 16px;
   min-width: 200px;
-  
+
   ::placeholder {
     color: ${palette.grayText};
     font-size: 16px;
@@ -24,26 +23,17 @@ const SearchInput = styled.input`
     color: ${palette.grayText};
   }
 `
-const HomeCards = () => {
-  const [items, setItems] = useState([])
-
-  useEffect(() => {
-    axios
-      .get('https://610688cc1f3487001743796f.mockapi.io/items')
-      .then((res) => {
-        setItems(res.data)
-      })
-  }, [])
-
+const HomeCards = ({ items, onAddToCard }) => {
   return (
     <Box pt={10}>
       {/* Заголовок та інпут  26/44 */}
       <Flex
+        px={15}
         mb={20}
         justifyContent={'space-between'}
         alignItems={'center'}
         sx={{
-          '@media (max-width: 992px)': {
+          '@media (max-width: 492px)': {
             flexDirection: 'column'
           }
         }}
@@ -54,7 +44,7 @@ const HomeCards = () => {
           sx={{
             display: 'block',
             '@media (max-width: 992px)': {
-              marginBottom:'10px'
+              marginBottom: '10px'
             }
           }}
         >
@@ -79,6 +69,7 @@ const HomeCards = () => {
       <Flex as={'ul'} flexWrap={'wrap'} justifyContent={'center'}>
         {items.map((item) => (
           <Card
+            onAddToCard={onAddToCard}
             key={item.id}
             id={item.id}
             imageUrl={item.imageUrl}

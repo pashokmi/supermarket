@@ -24,8 +24,8 @@ const HomeSlider = () => {
             <Image
               src={items.image}
               alt={items.alt}
-              width={1200}
-              height={350}
+              width={1920}
+              height={1080}
               objectFit="contain"
             />
           </Box>

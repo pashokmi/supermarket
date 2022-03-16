@@ -1,37 +1,31 @@
 export const links = [
-    {
-      url: '/',
-      text: 'Home'
-    },
+  {
+    url: '/',
+    text: 'Home'
+  },
 
-    {
-      url: '/shop',
-      text: 'Shop'
-    }
-  ]
+  {
+    url: '/shop',
+    text: 'Shop'
+  }
+]
 
-  export const sliderContent = [
-    {
-      image:'/static/frog.jpg',
-      alt:'alt-Home',
-      text: 'Home'
-    },
+export const sliderContent = [
+  {
+    image: '/static/banner.jpg',
+    alt: 'alt-Home',
+    text: 'Home'
+  },
 
-    {
-      image:'/static/frog.jpg',
-      alt:'alt-Shop',
-      text: 'Shop'
-    },
+  {
+    image: '/static/banner2.jpg',
+    alt: 'alt-Shop',
+    text: 'Shop'
+  },
 
-    {
-      image:'/static/frog.jpg',
-      alt:'alt-bob',
-      text: 'bob'
-    },
-
-    {
-      image:'/static/frog.jpg',
-      alt:'alt-qop',
-      text: 'qop'
-    }
-  ]
+  {
+    image: '/static/banner3.jpg',
+    alt: 'alt-bob',
+    text: 'bob'
+  }
+]

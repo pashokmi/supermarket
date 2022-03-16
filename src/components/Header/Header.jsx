@@ -8,7 +8,7 @@ import HeaderCart from './HeaderCart'
 import { palette } from 'src/theme/palette'
 import { DiLinux } from 'react-icons/di'
 
-const Header = () => {
+const Header = ({ cartItems, onRemoveItem }) => {
   return (
     <Flex
       as={'nav'}
@@ -18,10 +18,10 @@ const Header = () => {
       mb={10}
       sx={{ borderBottom: `1px solid ${palette.gray}` }}
     >
-      <Link href={'/'} scroll={false}>
+      <Link href={'/'}>
         <Flex as={'a'} alignItems={'center'}>
           <DiLinux size={40} />
-          <Text fontSize={[3, 4]}> Наш Магазин</Text>
+          <Text fontSize={3}> Наш Магазин</Text>
         </Flex>
       </Link>
 
@@ -34,7 +34,7 @@ const Header = () => {
           </Box>
         ))}
       </Flex>
-      <HeaderCart />
+      <HeaderCart cartItems={cartItems} onRemoveItem={onRemoveItem} />
     </Flex>
   )
 }

@@ -8,10 +8,12 @@ import Box from 'src/ui/Box'
 import Flex from 'src/ui/Flex'
 import Text from 'src/ui/Text'
 
-const Card = ({ imageUrl, title, price }) => {
-  const [isAdded, setIsAdded] = useState(false)
+const Card = ({ id, imageUrl, title, price, onAddToCard, added = false }) => {
+  const [isAdded, setIsAdded] = useState(added)
 
+  const obj = { id, parentId: id, title, imageUrl, price }
   const onClickPlus = () => {
+    onAddToCard(obj)
     setIsAdded(!isAdded)
   }
 
@@ -48,13 +50,14 @@ const Card = ({ imageUrl, title, price }) => {
           height={150}
           objectFit="contain"
         />
-        <Text fontSize={[1, 2]} mb={'10px'}>
+        <Text fontSize={[1, 2]} my={'15px'} xs={{ textAlign: 'center' }}>
           {title}
         </Text>
         <Flex
           justifyContent={'space-around'}
           alignItems={'center'}
           width={'100%'}
+          mb={'10px'}
         >
           <Text fontSize={[2, 3]} fontWeight={500} color={palette.grayText}>
             {price} грн.
@@ -67,6 +70,21 @@ const Card = ({ imageUrl, title, price }) => {
             )}
           </Button>
         </Flex>
+        <Button
+          bg={palette.green}
+          color={palette.white}
+          p={'10px 15px'}
+          sx={{
+            borderRadius: '30px',
+            width: '100%',
+            opacity: '1',
+            ':hover': {
+              opacity: '0.8'
+            }
+          }}
+        >
+          Замовити в 1 клік
+        </Button>
       </Flex>
     </Box>
   )
