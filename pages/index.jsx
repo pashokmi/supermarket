@@ -42,7 +42,7 @@ export default function Home() {
           content="Найкращі мангали, та шампура! Шукайте в нашому магазині."
         />
         <link rel="icon" href="/favicon.ico" />
-        <meta property="og:image" content="/static/preview_logo.jpg" />
+        <meta property="og:image" content="/static/previewLogo.jpg" />
         <meta property="og:title" content="Mangal-Market" />
         <meta property="og:image:type" content="image/png" />
         <meta property="og:image:width" content="100" />
