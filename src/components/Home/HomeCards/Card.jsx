@@ -48,7 +48,7 @@ const Card = ({ id, imageUrl, title, price, onAddToCart, isItemAdded = false }) 
         }}
       >
         <Link href={`/items/${id}`}>
-          <Box as='a'>
+          <Flex flexDirection={'column'} as='a'>
             <Image
               src={imageUrl}
               alt={title}
@@ -59,7 +59,7 @@ const Card = ({ id, imageUrl, title, price, onAddToCart, isItemAdded = false }) 
             <Text fontSize={[1, 2]} my={'15px'} sx={{ textAlign: 'center' }}>
               {title}
             </Text>
-          </Box>
+          </Flex>
         </Link>
         <Flex
           justifyContent={'space-around'}

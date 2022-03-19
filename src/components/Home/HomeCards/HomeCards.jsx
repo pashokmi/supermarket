@@ -69,7 +69,7 @@ const HomeCards = ({ items, onAddToCart, isItemAdded }) => {
       </Flex>
 
       <Grid as={'ul'} justifyContent={'center'} sx={{
-        gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(190px, 1fr))',
         gap: '10px',
         '@media (max-width: 492px)': {
           gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
