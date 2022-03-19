@@ -25,10 +25,30 @@ const SearchInput = styled.input`
     color: ${palette.grayText};
   }
 `
-const HomeCards = ({ items, onAddToCart, isItemAdded }) => {
+const HomeCards = ({ items, onAddToCart, isItemAdded, isLoading,searchValue,
+                     onChangeSearchInput }) => {
+  const renderCard = () => {
+    const filtredCard = items.filter((item) =>
+      item.title.toLowerCase().includes(searchValue.toLowerCase())
+    )
+    return (isLoading ? [...Array(15)] : filtredCard).map((item) => (
+        <Card
+          onAddToCart={onAddToCart}
+          isItemAdded={isItemAdded}
+          // key={item.id}
+          {...item}
+          // id={item.id}
+          // imageUrl={item.imageUrl}
+          // title={item.title}
+          // price={item.price}
+          isLoading={isLoading}
+        />
+      )
+    )
+
+  }
   return (
     <Box pt={10}>
-      {/* Заголовок та інпут  26/44 */}
       <Flex
         px={15}
         mb={20}
@@ -50,10 +70,11 @@ const HomeCards = ({ items, onAddToCart, isItemAdded }) => {
             }
           }}
         >
-          Всі товари
+          {searchValue ? `Пошук по запиту: "${searchValue}"` : 'Всі товари'}
+
         </Text>
         <Flex alignItems={'center'} as='label' sx={{ position: 'relative' }}>
-          <SearchInput type={'text'} placeholder='Пошук...' />
+          <SearchInput onChange={onChangeSearchInput} value={searchValue} type={'text'} placeholder='Пошук...' />
           <Box
             sx={{
               position: 'absolute',
@@ -77,17 +98,7 @@ const HomeCards = ({ items, onAddToCart, isItemAdded }) => {
         }
       }}>
         {
-          items.map((item) => (
-            <Card
-              onAddToCart={onAddToCart}
-              isItemAdded={isItemAdded}
-              key={item.id}
-              id={item.id}
-              imageUrl={item.imageUrl}
-              title={item.title}
-              price={item.price}
-            />
-          ))
+          renderCard()
         }
       </Grid>
     </Box>

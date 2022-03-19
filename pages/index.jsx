@@ -10,22 +10,32 @@ import Container from 'src/ui/Container'
 const Home = () => {
   const [items, setItems] = useState([])
   const [cartItems, setCartItems] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [searchValue, setSearchValue] = useState('')
+
+  const onChangeSearchInput = (e) => {
+    setSearchValue(e.target.value)
+  }
+  console.log(isLoading)
   const isItemAdded = (id) => {
     return cartItems.some((obj) => Number(obj.parentId) === Number(id))
   }
   useEffect(() => {
     async function fetchData() {
       try {
-        axios
+        setIsLoading(true)
+        await axios
           .get('https://610688cc1f3487001743796f.mockapi.io/items')
           .then((res) => {
             setItems(res.data)
           })
-        axios
+        await axios
           .get('https://610688cc1f3487001743796f.mockapi.io/cart')
           .then((res) => {
             setCartItems(res.data)
           })
+        setIsLoading(false)
+
       } catch (error) {
         alert('Ошибка при запросе данных ;(')
         console.error(error)
@@ -34,7 +44,7 @@ const Home = () => {
 
     fetchData()
   }, [])
-
+  console.log(isLoading)
   const onAddToCart = async (obj) => {
     try {
       const findItem = cartItems.find((item) => Number(item.parentId) === Number(obj.id))
@@ -101,7 +111,14 @@ const Home = () => {
           <Header cartItems={cartItems} onRemoveItem={onRemoveItem} />
           <main>
             <HomeSlider />
-            <HomeCards items={items} isItemAdded={isItemAdded} onAddToCart={onAddToCart} />
+            <HomeCards
+              items={items}
+              isItemAdded={isItemAdded}
+              onAddToCart={onAddToCart}
+              isLoading={isLoading}
+              searchValue={searchValue}
+              onChangeSearchInput={onChangeSearchInput}
+            />
           </main>
           <footer>footer</footer>
         </Box>
