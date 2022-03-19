@@ -11,6 +11,7 @@ import { DiLinux } from 'react-icons/di'
 const Header = ({ cartItems, onRemoveItem }) => {
   return (
     <Flex
+      bg={palette.white}
       as={'nav'}
       justifyContent={'space-between'}
       alignItems={'center'}

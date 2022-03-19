@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import Button from 'src/ui/Button'
 import Flex from 'src/ui/Flex'
 import Box from 'src/ui/Box'

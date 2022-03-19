@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Head from 'next/head'
 import Header from 'src/components/Header/Header'
@@ -7,30 +7,69 @@ import HomeSlider from 'src/components/Home/HomeSlider/HomeSlider'
 import Box from 'src/ui/Box'
 import Container from 'src/ui/Container'
 
-export default function Home() {
+const Home = () => {
   const [items, setItems] = useState([])
   const [cartItems, setCartItems] = useState([])
-
+  const isItemAdded = (id) => {
+    return cartItems.some((obj) => Number(obj.parentId) === Number(id))
+  }
   useEffect(() => {
-    axios
-      .get('https://610688cc1f3487001743796f.mockapi.io/items')
-      .then((res) => {
-        setItems(res.data)
-      })
-    axios
-      .get('https://610688cc1f3487001743796f.mockapi.io/cart')
-      .then((res) => {
-        setCartItems(res.data)
-      })
+    async function fetchData() {
+      try {
+        axios
+          .get('https://610688cc1f3487001743796f.mockapi.io/items')
+          .then((res) => {
+            setItems(res.data)
+          })
+        axios
+          .get('https://610688cc1f3487001743796f.mockapi.io/cart')
+          .then((res) => {
+            setCartItems(res.data)
+          })
+      } catch (error) {
+        alert('Ошибка при запросе данных ;(')
+        console.error(error)
+      }
+    }
+
+    fetchData()
   }, [])
 
-  const onAddToCard = (obj) => {
-    axios.post('https://610688cc1f3487001743796f.mockapi.io/cart', obj)
-    setCartItems((prev) => [...prev, obj])
+  const onAddToCart = async (obj) => {
+    try {
+      const findItem = cartItems.find((item) => Number(item.parentId) === Number(obj.id))
+      if (findItem) {
+        setCartItems((prev) => prev.filter((item) => Number(item.parentId) !== Number(obj.id)))
+        await axios.delete(`https://610688cc1f3487001743796f.mockapi.io/cart/${findItem.id}`)
+      } else {
+        setCartItems((prev) => [...prev, obj])
+        const { data } = await axios.post('https://610688cc1f3487001743796f.mockapi.io/cart', obj)
+        setCartItems((prev) =>
+          prev.map((item) => {
+            if (item.parentId === data.parentId) {
+              return {
+                ...item,
+                id: data.id
+              }
+            }
+            return item
+          })
+        )
+      }
+    } catch (error) {
+      alert('Ошибка при добавлении в корзину')
+      console.error(error)
+    }
   }
+
   const onRemoveItem = (id) => {
-    axios.delete(`https://610688cc1f3487001743796f.mockapi.io/cart/${id}`)
-    setCartItems((prev) => prev.filter((item) => item.id !== id))
+    try {
+      axios.delete(`https://610688cc1f3487001743796f.mockapi.io/cart/${id}`)
+      setCartItems((prev) => prev.filter((item) => Number(item.id) !== Number(id)))
+    } catch (error) {
+      alert('Ошибка при удалении из корзины')
+      console.error(error)
+    }
   }
 
   return (
@@ -38,18 +77,18 @@ export default function Home() {
       <Head>
         <title>Supermarket</title>
         <meta
-          name="description"
-          content="Найкращі мангали, та шампура! Шукайте в нашому магазині."
+          name='description'
+          content='Найкращі мангали, та шампура! Шукайте в нашому магазині.'
         />
-        <link rel="icon" href="/favicon.ico" />
-        <meta property="og:image" content="/static/previewLogo.jpg" />
-        <meta property="og:title" content="Mangal-Market" />
-        <meta property="og:image:type" content="image/png" />
-        <meta property="og:image:width" content="100" />
-        <meta property="og:image:height" content="100" />
-        <meta name="twitter:card" content="summary" />
-        <meta name="twitter:title" content="Mangal-Market" />
-        <meta property="twitter:image" content="/static/preview_logo.jpg" />
+        <link rel='icon' href='/favicon.ico' />
+        <meta property='og:image' content='/static/previewLogo.jpg' />
+        <meta property='og:title' content='Mangal-Market' />
+        <meta property='og:image:type' content='image/png' />
+        <meta property='og:image:width' content='100' />
+        <meta property='og:image:height' content='100' />
+        <meta name='twitter:card' content='summary' />
+        <meta name='twitter:title' content='Mangal-Market' />
+        <meta property='twitter:image' content='/static/preview_logo.jpg' />
       </Head>
 
       <Container>
@@ -57,7 +96,7 @@ export default function Home() {
           <Header cartItems={cartItems} onRemoveItem={onRemoveItem} />
           <main>
             <HomeSlider />
-            <HomeCards items={items} onAddToCard={onAddToCard} />
+            <HomeCards items={items} isItemAdded={isItemAdded} onAddToCart={onAddToCart} />
           </main>
           <footer>footer</footer>
         </Box>
@@ -65,3 +104,4 @@ export default function Home() {
     </>
   )
 }
+export default Home

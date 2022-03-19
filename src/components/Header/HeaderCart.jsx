@@ -19,7 +19,7 @@ const HeaderCart = ({ cartItems = [], onRemoveItem }) => {
   return (
     <Box>
       <Button onClick={cartHandler}>
-        <Flex alignItems={'center'}>
+                   <Flex alignItems={'center'}>
           <GiShoppingCart size={35} /> <Text fontSize={2}>1205 грн.</Text>
         </Flex>
       </Button>

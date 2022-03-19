@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
+import Link from 'next/link'
 import { palette } from 'src/theme/palette'
 import Image from 'next/image'
 import Button from 'src/ui/Button'
@@ -8,13 +9,11 @@ import Box from 'src/ui/Box'
 import Flex from 'src/ui/Flex'
 import Text from 'src/ui/Text'
 
-const Card = ({ id, imageUrl, title, price, onAddToCard, added = false }) => {
-  const [isAdded, setIsAdded] = useState(added)
+const Card = ({ id, imageUrl, title, price, onAddToCart, isItemAdded = false }) => {
 
   const obj = { id, parentId: id, title, imageUrl, price }
   const onClickPlus = () => {
-    onAddToCard(obj)
-    setIsAdded(!isAdded)
+    onAddToCart(obj)
   }
 
   return (
@@ -43,16 +42,20 @@ const Card = ({ id, imageUrl, title, price, onAddToCard, added = false }) => {
         as={'article'}
         p={'20px'}
       >
-        <Image
-          src={imageUrl}
-          alt={title}
-          width={150}
-          height={150}
-          objectFit="contain"
-        />
-        <Text fontSize={[1, 2]} my={'15px'} xs={{ textAlign: 'center' }}>
-          {title}
-        </Text>
+        <Link href={`/items/${id}`}>
+          <Box as="a">
+            <Image
+              src={imageUrl}
+              alt={title}
+              width={150}
+              height={150}
+              objectFit="contain"
+            />
+            <Text fontSize={[1, 2]} my={'15px'} xs={{ textAlign: 'center' }}>
+              {title}
+            </Text>
+          </Box>
+        </Link>
         <Flex
           justifyContent={'space-around'}
           alignItems={'center'}
@@ -63,7 +66,7 @@ const Card = ({ id, imageUrl, title, price, onAddToCard, added = false }) => {
             {price} грн.
           </Text>
           <Button onClick={onClickPlus} sx={{ display: 'block' }}>
-            {isAdded ? (
+            {isItemAdded(id) ? (
               <BsFillCartXFill size={25} color={palette.blue} />
             ) : (
               <BsFillCartPlusFill size={25} color={palette.green} />

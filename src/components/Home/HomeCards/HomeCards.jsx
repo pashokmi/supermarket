@@ -23,7 +23,7 @@ const SearchInput = styled.input`
     color: ${palette.grayText};
   }
 `
-const HomeCards = ({ items, onAddToCard }) => {
+const HomeCards = ({ items, onAddToCart, isItemAdded }) => {
   return (
     <Box pt={10}>
       {/* Заголовок та інпут  26/44 */}
@@ -69,7 +69,8 @@ const HomeCards = ({ items, onAddToCard }) => {
       <Flex as={'ul'} flexWrap={'wrap'} justifyContent={'center'}>
         {items.map((item) => (
           <Card
-            onAddToCard={onAddToCard}
+            onAddToCart={onAddToCart}
+            isItemAdded={isItemAdded}
             key={item.id}
             id={item.id}
             imageUrl={item.imageUrl}
