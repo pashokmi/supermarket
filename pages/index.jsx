@@ -92,7 +92,12 @@ const Home = () => {
       </Head>
 
       <Container>
-        <Box bg={'white'} p={20} borderRadius={'20px'} mt={10}>
+        <Box bg={'white'} borderRadius={'20px'} mt={10} sx={{
+          padding: '20px',
+          '@media (max-width: 492px)': {
+            padding: '10px'
+          }
+        }}>
           <Header cartItems={cartItems} onRemoveItem={onRemoveItem} />
           <main>
             <HomeSlider />

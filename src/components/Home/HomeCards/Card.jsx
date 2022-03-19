@@ -32,7 +32,7 @@ const Card = ({ id, imageUrl, title, price, onAddToCart, isItemAdded = false }) 
           transform: 'scale(1.04)'
         },
         '@media (max-width: 492px)': {
-          maxWidth: '145px'
+          maxWidth: '155px'
         }
       }}
     >
@@ -41,15 +41,20 @@ const Card = ({ id, imageUrl, title, price, onAddToCart, isItemAdded = false }) 
         alignItems={'center'}
         as={'article'}
         p={'20px'}
+        sx={{
+          '@media (max-width: 492px)': {
+            padding: '5px'
+          }
+        }}
       >
         <Link href={`/items/${id}`}>
-          <Box as="a">
+          <Box as='a'>
             <Image
               src={imageUrl}
               alt={title}
               width={150}
               height={150}
-              objectFit="contain"
+              objectFit='contain'
             />
             <Text fontSize={[1, 2]} my={'15px'} xs={{ textAlign: 'center' }}>
               {title}
@@ -60,16 +65,17 @@ const Card = ({ id, imageUrl, title, price, onAddToCart, isItemAdded = false }) 
           justifyContent={'space-around'}
           alignItems={'center'}
           width={'100%'}
+          py={'5px'}
           mb={'10px'}
         >
-          <Text fontSize={[2, 3]} fontWeight={500} color={palette.grayText}>
+          <Text fontSize={[3, 4]} fontWeight={500} color={palette.grayText}>
             {price} грн.
           </Text>
           <Button onClick={onClickPlus} sx={{ display: 'block' }}>
             {isItemAdded(id) ? (
-              <BsFillCartXFill size={25} color={palette.blue} />
+              <BsFillCartXFill size={30} color={palette.blue} />
             ) : (
-              <BsFillCartPlusFill size={25} color={palette.green} />
+              <BsFillCartPlusFill size={30} color={palette.green} />
             )}
           </Button>
         </Flex>
