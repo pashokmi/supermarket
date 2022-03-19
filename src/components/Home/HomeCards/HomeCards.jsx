@@ -6,6 +6,7 @@ import Text from 'src/ui/Text'
 import styled from 'styled-components'
 import { BsSearch } from 'react-icons/bs'
 import Card from './Card'
+import Grid from 'src/ui/Grid'
 
 const SearchInput = styled.input`
   padding: 15px 15px 15px 45px;
@@ -66,7 +67,7 @@ const HomeCards = ({ items, onAddToCart, isItemAdded }) => {
         </Flex>
       </Flex>
 
-      <Flex as={'ul'} flexWrap={'wrap'} justifyContent={'center'}>
+      <Grid as={'ul'} justifyContent={'center'} sx={{gridTemplateColumns:'repeat(auto-fit, minmax(210px, 1fr))', gap:'5px'}}>
         {items.map((item) => (
           <Card
             onAddToCart={onAddToCart}
@@ -78,7 +79,7 @@ const HomeCards = ({ items, onAddToCart, isItemAdded }) => {
             price={item.price}
           />
         ))}
-      </Flex>
+      </Grid>
     </Box>
   )
 }

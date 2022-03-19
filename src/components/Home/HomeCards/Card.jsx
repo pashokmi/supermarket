@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import Link from 'next/link'
 import { palette } from 'src/theme/palette'
@@ -21,7 +20,6 @@ const Card = ({ id, imageUrl, title, price, onAddToCart, isItemAdded = false }) 
       m={'5px'}
       as={'li'}
       sx={{
-        maxWidth: '210px',
         width: '100%',
         border: `1px solid ${palette.gray}`,
         borderRadius: '30px',
@@ -32,7 +30,9 @@ const Card = ({ id, imageUrl, title, price, onAddToCart, isItemAdded = false }) 
           transform: 'scale(1.04)'
         },
         '@media (max-width: 492px)': {
-          maxWidth: '155px'
+          ':hover': {
+            transform: 'scale(1.0)'
+          }
         }
       }}
     >
@@ -56,7 +56,7 @@ const Card = ({ id, imageUrl, title, price, onAddToCart, isItemAdded = false }) 
               height={150}
               objectFit='contain'
             />
-            <Text fontSize={[1, 2]} my={'15px'} xs={{ textAlign: 'center' }}>
+            <Text fontSize={[1, 2]} my={'15px'} sx={{ textAlign: 'center' }}>
               {title}
             </Text>
           </Box>

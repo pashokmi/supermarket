@@ -17,10 +17,10 @@ const HomeSlider = () => {
   }
 
   return (
-    <Box pt={45} mx={'auto'}>
+    <Box mx={'auto'} >
       <Slider {...settings}>
         {sliderContent.map((items) => (
-          <Box color={'red'} key={items.alt}>
+          <Box key={items.alt} >
             <Image
               src={items.image}
               alt={items.alt}

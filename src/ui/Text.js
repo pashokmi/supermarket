@@ -45,8 +45,7 @@ TextBase.propTypes = {
 }
 
 Text.defaultProps = {
-  fontSize: 'medium',
-  color: 'test'
+  fontSize: 'medium'
 }
 
 export default Text
