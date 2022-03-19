@@ -20,6 +20,7 @@ const SearchInput = styled.input`
     color: ${palette.grayText};
     font-size: 16px;
   }
+
   :target {
     color: ${palette.grayText};
   }
@@ -51,8 +52,8 @@ const HomeCards = ({ items, onAddToCart, isItemAdded }) => {
         >
           Всі товари
         </Text>
-        <Flex alignItems={'center'} as="label" sx={{ position: 'relative' }}>
-          <SearchInput type={'text'} placeholder="Пошук..." />
+        <Flex alignItems={'center'} as='label' sx={{ position: 'relative' }}>
+          <SearchInput type={'text'} placeholder='Пошук...' />
           <Box
             sx={{
               position: 'absolute',
@@ -67,18 +68,27 @@ const HomeCards = ({ items, onAddToCart, isItemAdded }) => {
         </Flex>
       </Flex>
 
-      <Grid as={'ul'} justifyContent={'center'} sx={{gridTemplateColumns:'repeat(auto-fit, minmax(210px, 1fr))', gap:'5px'}}>
-        {items.map((item) => (
-          <Card
-            onAddToCart={onAddToCart}
-            isItemAdded={isItemAdded}
-            key={item.id}
-            id={item.id}
-            imageUrl={item.imageUrl}
-            title={item.title}
-            price={item.price}
-          />
-        ))}
+      <Grid as={'ul'} justifyContent={'center'} sx={{
+        gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))',
+        gap: '10px',
+        '@media (max-width: 492px)': {
+          gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
+          gap: '5px'
+        }
+      }}>
+        {
+          items.map((item) => (
+            <Card
+              onAddToCart={onAddToCart}
+              isItemAdded={isItemAdded}
+              key={item.id}
+              id={item.id}
+              imageUrl={item.imageUrl}
+              title={item.title}
+              price={item.price}
+            />
+          ))
+        }
       </Grid>
     </Box>
   )
