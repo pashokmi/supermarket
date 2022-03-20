@@ -30,8 +30,8 @@ const DynamicCard = () => {
         >
           <Header />
           <Flex
-            flexDirection={'column'}
             alignItems={'center'}
+            justifyContent={'space-between'}
             as={'article'}
             p={'20px'}
           >
@@ -42,41 +42,43 @@ const DynamicCard = () => {
               height={350}
               objectFit='contain'
             />
-            <Text fontSize={[1, 2]} my={'15px'} xs={{ textAlign: 'center' }}>
-              {'Weber Master-Touch GBS Premium E-5770'}
-            </Text>
-            <Flex
-              justifyContent={'space-around'}
-              alignItems={'center'}
-              width={'100%'}
-              mb={'10px'}
-            >
-              <Text fontSize={[2, 3]} fontWeight={500} color={palette.grayText}>
-                {'6895'} грн.
+            <Box>
+              <Text fontSize={[1, 2]} my={'15px'} xs={{ textAlign: 'center' }}>
+                {'Weber Master-Touch GBS Premium E-5770'}
               </Text>
-              <Button onClick={onClickPlus} sx={{ display: 'block' }}>
-                {isAdded ? (
-                  <BsFillCartXFill size={25} color={palette.blue} />
-                ) : (
-                  <BsFillCartPlusFill size={25} color={palette.green} />
-                )}
+              <Flex
+                justifyContent={'space-around'}
+                alignItems={'center'}
+                width={'100%'}
+                mb={'10px'}
+              >
+                <Text fontSize={[2, 3]} fontWeight={500} color={palette.grayText}>
+                  {'6895'} грн.
+                </Text>
+                <Button onClick={onClickPlus} sx={{ display: 'block' }}>
+                  {isAdded ? (
+                    <BsFillCartXFill size={25} color={palette.blue} />
+                  ) : (
+                    <BsFillCartPlusFill size={25} color={palette.green} />
+                  )}
+                </Button>
+              </Flex>
+              <Button
+                bg={palette.green}
+                color={palette.white}
+                p={'10px 15px'}
+                sx={{
+                  borderRadius: '30px',
+                  width: '100%',
+                  opacity: '1',
+                  ':hover': {
+                    opacity: '0.8'
+                  }
+                }}
+              >
+                Замовити в 1 клік
               </Button>
-            </Flex>
-            <Button
-              bg={palette.green}
-              color={palette.white}
-              p={'10px 15px'}
-              sx={{
-                borderRadius: '30px',
-                width: '100%',
-                opacity: '1',
-                ':hover': {
-                  opacity: '0.8'
-                }
-              }}
-            >
-              Замовити в 1 клік
-            </Button>
+            </Box>
           </Flex>
         </Box>
       </Box>

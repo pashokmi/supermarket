@@ -16,7 +16,6 @@ const Home = () => {
   const onChangeSearchInput = (e) => {
     setSearchValue(e.target.value)
   }
-  console.log(isLoading)
   const isItemAdded = (id) => {
     return cartItems.some((obj) => Number(obj.parentId) === Number(id))
   }
@@ -44,7 +43,7 @@ const Home = () => {
 
     fetchData()
   }, [])
-  console.log(isLoading)
+
   const onAddToCart = async (obj) => {
     try {
       const findItem = cartItems.find((item) => Number(item.parentId) === Number(obj.id))

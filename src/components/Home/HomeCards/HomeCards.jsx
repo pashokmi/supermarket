@@ -25,23 +25,21 @@ const SearchInput = styled.input`
     color: ${palette.grayText};
   }
 `
-const HomeCards = ({ items, onAddToCart, isItemAdded, isLoading,searchValue,
-                     onChangeSearchInput }) => {
+const HomeCards = ({
+                     items, onAddToCart, isItemAdded, isLoading, searchValue,
+                     onChangeSearchInput
+                   }) => {
   const renderCard = () => {
-    const filtredCard = items.filter((item) =>
+    const filterCard = items.filter((item) =>
       item.title.toLowerCase().includes(searchValue.toLowerCase())
     )
-    return (isLoading ? [...Array(15)] : filtredCard).map((item) => (
+    return (isLoading ? [...Array(15)] : filterCard).map((item) => (
         <Card
+          key={item?.id}
           onAddToCart={onAddToCart}
           isItemAdded={isItemAdded}
-          // key={item.id}
-          {...item}
-          // id={item.id}
-          // imageUrl={item.imageUrl}
-          // title={item.title}
-          // price={item.price}
           isLoading={isLoading}
+          {...item}
         />
       )
     )

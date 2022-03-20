@@ -4,7 +4,7 @@ import Flex from 'src/ui/Flex'
 import Box from 'src/ui/Box'
 import Text from 'src/ui/Text'
 import { FaRegTimesCircle } from 'react-icons/fa'
-import { GiShoppingCart } from 'react-icons/gi'
+import { HiOutlineShoppingCart } from "react-icons/hi";
 import CartItem from './CartItem'
 import { EmptyCart } from './EmptyCart'
 import { CgArrowRight } from 'react-icons/cg'
@@ -16,11 +16,13 @@ const HeaderCart = ({ cartItems = [], onRemoveItem }) => {
     setOpenCart(!openCart)
   }
 
+  const totalPrice = cartItems.reduce((sum, obj) => +obj.price + sum, 0)
   return (
     <Box>
       <Button onClick={cartHandler}>
-                   <Flex alignItems={'center'}>
-          <GiShoppingCart size={35} /> <Text fontSize={2}>1205 грн.</Text>
+        <Flex alignItems={'center'}>
+          <HiOutlineShoppingCart size={35} color={palette.blue}/>
+          <Text fontSize={3} color={palette.blue}>{totalPrice} грн.</Text>
         </Flex>
       </Button>
       <Flex
@@ -44,7 +46,7 @@ const HeaderCart = ({ cartItems = [], onRemoveItem }) => {
             justifyContent={'space-between'}
             alignItems={'center'}
           >
-            <Text fontSize={[3, 4, 5]} sx={{ userSelect: 'none' }}>
+            <Text fontSize={[3, 4, 5]}>
               Кошик
             </Text>
             <Flex onClick={cartHandler} sx={{ cursor: 'pointer' }}>
@@ -68,28 +70,39 @@ const HeaderCart = ({ cartItems = [], onRemoveItem }) => {
               ) : (
                 <>
                   {cartItems.map((item) => (
-                    <CartItem  key={item.id} item={item} onRemoveItem={onRemoveItem} />
+                    <CartItem key={item.id} item={item} onRemoveItem={onRemoveItem} />
                   ))}
                 </>
               )}
             </Flex>
           </Flex>
-          <Flex justifyContent={'center'}>
+          <Flex justifyContent={'center'}
+                flexDirection={'column'}
+                alignItems={'center'}>
             {cartItems.length > 0 && (
-              <Button
-                p={15}
-                sx={{
-                  border: `1px solid ${palette.gray}`,
-                  borderRadius: '30px',
-                  color: `${palette.white}`,
-                  display: 'flex',
-                  alignItems: 'center',
-                  fontSize: '18px'
-                }}
-                bg={palette.green}
-              >
-                Оформити замовлення <CgArrowRight size={25} />{' '}
-              </Button>
+              <>
+                <Flex alignItems={'center'} py={'5px'} mb={'10px'}>
+                  <Text fontSize={[2,3]}>Замовлення на сумму:</Text>
+                  <Text
+                    px={'5px'}
+                    fontSize={[3,4]}
+                    color={palette.blue}>{totalPrice}.грн</Text>
+                </Flex>
+                <Button
+                  p={15}
+                  sx={{
+                    border: `1px solid ${palette.gray}`,
+                    borderRadius: '30px',
+                    color: `${palette.white}`,
+                    display: 'flex',
+                    alignItems: 'center',
+                    fontSize: '18px'
+                  }}
+                  bg={palette.green}
+                >
+                  Оформити замовлення <CgArrowRight size={25} />{' '}
+                </Button>
+              </>
             )}
           </Flex>
         </Box>

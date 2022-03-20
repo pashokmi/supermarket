@@ -22,7 +22,7 @@ const Header = ({ cartItems, onRemoveItem }) => {
       <Link href={'/'}>
         <Flex as={'a'} alignItems={'center'}>
           <DiLinux size={40} />
-          <Text fontSize={3}> Наш Магазин</Text>
+          <Text fontSize={3}>Mangal-Market</Text>
         </Flex>
       </Link>
 
